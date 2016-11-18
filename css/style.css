@@ -4,18 +4,11 @@ h1 {
   font-family: arial, sans-serif;
 }
 
-.canvas {
+#canvas {
+  position: absolute;
   margin-left: auto;
   margin-right: auto;
   display: block;
-}
-
-.dataPointNoDoping {
-  fill: green;
-}
-
-.dataPointDoping {
-  fill: red;
 }
 
 .dataPointNoDoping:hover {
@@ -26,19 +19,17 @@ h1 {
   border: 1px solid black;
 }
 
-div.tooltip {
+#tooltip {
   position: absolute;
-  text-align: center;
+  text-align: left;
   width: 200px;
-  height: 28px;
-  left: 100px;
-  top: 100px;
   padding: 2px;
   font: 12px sans-serif;
-  background: lightsteelblue;
+  background: antiquewhite;
   border: 0px;
   border-radius: 8px;
   pointer-events: none;
+  opacity: 0;
 }
 
 body{
