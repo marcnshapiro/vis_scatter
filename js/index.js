@@ -73,7 +73,7 @@ $(document).ready(function() {
       .attr('transform', 'translate(-35, ' + height/2 + ') rotate(-90)').style("font-weight", "bold").style("font-size", "18px")
       .style("text-anchor", "middle");
 
-    g.append("text").text("Time behind fastest time").style("font-weight", "bold").style("font-size", "18px")
+    g.append("text").text("Minutese behind fastest time").style("font-weight", "bold").style("font-size", "18px")
       .attr('transform', 'translate(' + (width)/2 + ', ' + (height + 40) + ')')
       .style("text-anchor", "middle");
   
