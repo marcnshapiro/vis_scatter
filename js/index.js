@@ -69,44 +69,63 @@ $(document).ready(function() {
 
     var g = main.append("svg:g"); 
    
-    g.append("text").text("Ranking")
-      .attr('transform', 'translate(-35, 200) rotate(-90)');
-    g.append("text").text("Time behind fastest time")
-      .attr('transform', 'translate(200, ' + (height + 40) + ')');
+    g.append("text").text("Ranking").style("font-weight", "bold").style("font-size", "18px")
+      .attr('transform', 'translate(-35, ' + height/2 + ') rotate(-90)').style("font-weight", "bold").style("font-size", "18px")
+      .style("text-anchor", "middle");
+
+    g.append("text").text("Time behind fastest time").style("font-weight", "bold").style("font-size", "18px")
+      .attr('transform', 'translate(' + (width)/2 + ', ' + (height + 40) + ')')
+      .style("text-anchor", "middle");
   
     var points = g.selectAll("scatter-dots").data(data).enter();
 
     points.append("circle")
-          .attr("cx", function (d,i) { return x(d.Seconds); })
-          .attr("cy", function (d) { return y(d.Place); })
-          .attr("r", 6)
-          .attr("style", function(d) {
-              if (d.Doping === "") {
-                return "fill:green";
-              } else {
-                return "fill:red";
-              }
-          })
-         .on("mouseover", function(d, i) {
-            var posLeft = Math.max(($("body").width() - width - 50)/2, margin.left + 15) + "px";
-            var posTop = $("#canvas").offset().top + 15 + "px";
-            var tooltip = d3.select("#tooltip").style("left", posLeft).style("top", posTop);
+      .attr("cx", function (d,i) { return x(d.Seconds); })
+      .attr("cy", function (d) { return y(d.Place); })
+      .attr("r", 6)
+      .attr("style", function(d) {
+        if (d.Doping === "") {
+          return "fill: #00cc00";
+        } else {
+          return "fill: #aa0000";
+        }
+      })
+      .on("mouseover", function(d) {
+        
+        var posLeft = Math.max(($("body").width() - width - 50)/2, margin.left + 15) + "px";
+        var posTop = $("#canvas").offset().top + 15 + "px";
+        var tooltip = d3.select("#tooltip").style("left", posLeft).style("top", posTop);
+        var html = "Cyclist: " + d.Name + "<br/>";
 
-            tooltip.transition().duration(200).style("opacity", .9);
-            var html = "Cyclist: " + d.Name + "<br/>"
-            html += "Nationality: " + d.Nationality + "<br/>";
-            html += "Year: " + d.Year + "<br/>";
-            html += "Time: " + d.Time + "<br/><br/>";
-            html += d.Doping != "" ? d.Doping : "No doping alegations";
-            tooltip.html(html);
-          })
-         .on("mouseout", function(d) {
-          var tooltip = d3.select("#tooltip");
-           tooltip.transition().duration(500).style("opacity", 0);
-          })
+        html += "Nationality: " + d.Nationality + "<br/>";
+        html += "Year: " + d.Year + "<br/>";
+        html += "Time: " + d.Time + "<br/><br/>";
+        html += d.Doping != "" ? d.Doping : "No doping alegations";
+        tooltip.html(html);
+
+        tooltip.transition().duration(200).style("opacity", .9);
+        d3.select(this).attr("style", function(d) {
+          if (d.Doping === "") {
+            return "fill: #00ff00";
+          } else {
+            return "fill: #ff0000";
+          }
+        })
+      })
+      .on("mouseout", function(d) {
+        var tooltip = d3.select("#tooltip");
+        tooltip.transition().duration(500).style("opacity", 0);
+        d3.select(this).attr("style", function(d) {
+          if (d.Doping === "") {
+            return "fill: #00cc00";
+          } else {
+            return "fill: #aa0000";
+          }
+        })
+      })
     points.insert("text")
-          .attr("x", function(d, i) { return x(d.Seconds) + 15; })
-          .attr("y", function(d) { return y(d.Place) + 6; })
-          .text(function(d) { return d.Name; });
+      .attr("x", function(d, i) { return x(d.Seconds) + 15; })
+      .attr("y", function(d) { return y(d.Place) + 6; })
+      .text(function(d) { return d.Name; });
   });
 });
