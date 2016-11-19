@@ -11,20 +11,9 @@ h1 {
   display: block;
 }
 
-.dataPointNoDoping {
-  background: green;
-}
-
-.dataPointNoDoping:hover {
-  border: 1px solid black;
-}
-
-.dataPointDoping {
-  background: red;
-}
-
-.dataPointDoping:hover {
-  border: 1px solid black;
+.mouseover {
+  stroke: black;
+  stroke-width: 2;
 }
 
 #tooltip {
